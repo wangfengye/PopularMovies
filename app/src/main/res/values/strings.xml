@@ -1,11 +1,21 @@
 <resources>
     <string name="app_name">PopularMovies</string>
-    <string name="no_data">无数据</string>
+    <string name="no_data">网络异常,无新数据</string>
     <string name="introduction">简介</string>
     <string name="release_date_title">上映日期</string>
     <string name="vote_title">评分</string>
+    <string name="menu_popular">最受欢迎</string>
+    <string name="menu_vote">评分最高</string>
+    <string name="trailer">预告片</string>
+    <string name="runtime_title">时长</string>
+    <string name="minutes">分钟</string>
+    <string name="unknow">未知</string>
     <string-array name="spinner">
         <item>最受欢迎</item>
         <item>评分最高</item>
+    </string-array>
+    <string-array name="collections">
+        <item>全部</item>
+        <item>收藏</item>
     </string-array>
 </resources>

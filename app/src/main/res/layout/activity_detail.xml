@@ -7,17 +7,16 @@
     android:padding="4dp"
     tools:context="com.example.feng.popularmovies.DetailActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="8dp" />
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/title"
@@ -26,16 +25,15 @@
             android:layout_marginTop="8dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="小黄人大眼萌"
-            app:layout_constraintTop_toBottomOf="@+id/poster"
-            tools:layout_editor_absoluteX="16dp" />
+            tools:text="小黄人大眼萌"/>
+        <LinearLayout
+            android:paddingTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/release_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:layout_editor_absoluteX="16dp"
             android:text="@string/release_date_title" />
 
         <TextView
@@ -43,49 +41,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="2017-1-12"
-            app:layout_constraintLeft_toRightOf="@+id/release_title"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
-
+            android:layout_marginStart="24dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:paddingTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/vote_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="16dp"
-            android:text="@string/vote_title"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/release_title" />
+            android:text="@string/vote_title"/>
 
         <TextView
             android:id="@+id/vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:text="9.7"
-            app:layout_constraintLeft_toRightOf="@+id/vote_title"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/release" />
+            android:layout_marginStart="56dp"
+            tools:text="9.7"/>
+        </LinearLayout>
+        <LinearLayout
+            android:paddingTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/runtime_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/runtime_title"/>
 
+            <TextView
+                android:id="@+id/runtime"
+                android:layout_marginStart="56dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="89"/>
+        </LinearLayout>
         <TextView
+            android:id="@+id/trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="@string/trailer"/>
+        <TextView
+            android:paddingTop="8dp"
             android:id="@+id/desc_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/introduction"
-            tools:layout_editor_absoluteX="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/vote_title" />
+            android:text="@string/introduction"/>
 
         <TextView
             android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/desc_title"
-            tools:layout_editor_absoluteX="0dp"
             tools:text="《小小兵》故事起源于盘古开天时期，刚开始只是一个黄色的有机体，随着时间渐渐演化成小小兵团，他们的存在目的就是要服侍当代最凶恶的主人，然而从T. Rex 恐龙，埃及法老王，拿破仑甚至是德古拉，小小兵总是不停的失败了-到最后小小兵们发现已经没有可以服侍的主人，从此开始郁郁寡欢，甚至逐渐凋零。这时其中的一只小小兵—凯文他有个伟大的计画，就是带着他的麻吉—大胃王史都华还有胆小的萝卜，挺身而出踏上寻找新主人的冒险旅程……"/>
 
-
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

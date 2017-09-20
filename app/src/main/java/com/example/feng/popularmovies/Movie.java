@@ -7,12 +7,24 @@ import java.io.Serializable;
  */
 
 public class Movie implements Serializable{
+    private Long id;
     private String title;
     private String poster;
     private double voteAverage;
     private double popularity;
     private String desc;
     private String releaseDate;
+    private Long runtime;
+    private String trailer;
+    private Boolean isCollection =false;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -56,5 +68,33 @@ public class Movie implements Serializable{
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public Boolean getCollection() {
+        return isCollection;
+    }
+
+    public void setCollection(Boolean collection) {
+        isCollection = collection;
+    }
+
+    public Long getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(Long runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 }

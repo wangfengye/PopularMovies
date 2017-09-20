@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity"></activity>
+        <provider
+            android:authorities="com.example.feng.popularmovies"
+            android:name=".MovieProvider"/>
     </application>
 
 </manifest>
