@@ -10,6 +10,7 @@
     <string name="runtime_title">时长</string>
     <string name="minutes">分钟</string>
     <string name="unknow">未知</string>
+    <string name="sync_account_type">syncAccountType</string>
     <string-array name="spinner">
         <item>最受欢迎</item>
         <item>评分最高</item>

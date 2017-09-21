@@ -2,12 +2,18 @@ package com.example.feng.popularmovies;
 
 import android.net.Uri;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fengye on 2017/9/20.
@@ -15,6 +21,9 @@ import java.net.URL;
  */
 
 public  class HttpUtil {
+    private static final String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/";
+    public static final String URL_POPULAR = "popular";
+    public static final String URL_TOP_RATED = "top_rated";
     public static final String KEY_API_KEY = "api_key";
     public static final String KEY_LANGUAGE = "language";
     public static final String ZH = "zh";
@@ -57,5 +66,34 @@ public  class HttpUtil {
             }
         }
         return result;
+    }
+    /**
+     *
+     * @param result json
+     * @return 转化的Movie 集合
+     */
+    public static List<Movie> convert(String result) {
+        if (result == null||result.length()==0) return null;
+        List<Movie> movies = new ArrayList<>();
+        try {
+            JSONObject ob = new JSONObject(result);
+            JSONArray list = ob.getJSONArray(HttpParams.Params.getKeyResults());
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject data = list.getJSONObject(i);
+                Movie movie = new Movie();
+                movie.setId(data.getLong(HttpParams.Params.getKeyId()));
+                movie.setTitle(data.getString(HttpParams.Params.getKeyTitle()));
+                movie.setPoster(BASE_URL_IMAGE + data.getString(HttpParams.Params.getKeyPoster()));
+                movie.setPopularity(data.getDouble(HttpParams.Params.getKeyPopular()));
+                movie.setVoteAverage(data.getDouble(HttpParams.Params.getKeyVote()));
+                movie.setDesc(data.getString(HttpParams.Params.getKeyDesc()));
+                movie.setReleaseDate(data.getString(HttpParams.Params.getKeyReleaseDate()));
+                movies.add(movie);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movies;
+
     }
 }

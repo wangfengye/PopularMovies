@@ -40,17 +40,19 @@ public class CacheLoader extends AsyncTaskLoader<CacheData> {
         if (mSetCache!=null){
             Boolean inert=mSetCache.onSetCache();
             cacheData=new CacheData(CacheData.TYPE_INSERT,inert);
+            return cacheData;
         }
         if (mGetCache!=null){
             List<Movie> movies=mGetCache.onGetCache();
             cacheData=new CacheData(CacheData.TYPE_QUERY,movies);
+            return cacheData;
         }
         if (mUpdate!=null){
             Boolean update= mUpdate.onUpdate();
             cacheData= new CacheData(CacheData.TYPE_UPDATE,update);
-
+            return cacheData;
         }
-        return cacheData;
+        return null;
     }
     public interface SetCache{
         boolean onSetCache();

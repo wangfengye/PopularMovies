@@ -1,6 +1,10 @@
 package com.example.feng.popularmovies;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,21 +26,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
-    public static final String KEY_URL = "url";
     private static final int LOADER_MAIN_ID = 1;
     private static final int LOADER_INSERT = 2;
     private static final int LOADER_QUERY = 3;
+    public static final String ACCOUNT_TYPE = "com.android.example.sync";
+    public static final String ACCOUNT = "dummyaccount";
+    public static final long SYNC_INTERVAL = 24*60*60;
+    private static final String AUTHORITY = "com.example.feng.popularmovies";
     private ThumbnailAdapter adapter;
     private final Handler mHanler = new Handler();
+    private Account mAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAccount= createAccount(this);
+        createSync();
         initView();
         register();
         getCache();
 
+    }
+//创建同步功能
+    private void createSync() {
+        getContentResolver().addPeriodicSync(mAccount,AUTHORITY,Bundle.EMPTY,SYNC_INTERVAL);
+        getContentResolver().setSyncAutomatically(mAccount, AUTHORITY, true);
+    }
+
+    /**
+     * 创建Account, syncAdpter需要使用
+     *
+     */
+    private Account createAccount(Context context) {
+        Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
+        AccountManager manager = (AccountManager) context.getSystemService(ACCOUNT_SERVICE);
+        manager.addAccountExplicitly(newAccount,null,null);
+        return newAccount;
     }
 
     /**
@@ -163,7 +189,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                reSetData();
+                //reSetData();
+                Bundle settingsBundle = new Bundle();
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_MANUAL, true);
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        /*
+         * Request the sync for the default account, authority, and
+         * manual sync settings
+         */
+                ContentResolver.requestSync(mAccount, AUTHORITY, settingsBundle);
                 break;
         }
         return super.onOptionsItemSelected(item);
